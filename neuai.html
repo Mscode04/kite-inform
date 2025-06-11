@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuAI: AI for Daily Life</title>
+    <link rel="icon" href="/assets/images/NT LOGO PNG WHITE.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4a6bff;
+            --secondary: #ff6b6b;
+            --dark: #2c3e50;
+            --light: #f8f9fa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7ff;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section with BG Image */
+        .hero {
+            padding: 120px 0;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ba0ac3, #0ce3ff);
+            opacity: 0.7;
+            z-index: 1;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin: 0 auto 30px;
+            max-width: 600px;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: white;
+            color: var(--primary);
+            padding: 14px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:hover {
+            background-color: var(--secondary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Rest of your existing CSS remains the same */
+        .section-title {
+            text-align: center;
+            margin: 60px 0 40px;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--dark);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 4px;
+            background-color: var(--secondary);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .course-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .course-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .course-card:hover .card-img img {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .card-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .card-content p {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        /* Special Offers */
+        .special-offers {
+            background-color: #f0f4ff;
+            padding: 70px 0;
+            margin: 60px 0;
+        }
+
+        .offer-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px auto;
+            max-width: 650px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            border: 2px dashed var(--secondary);
+            transition: all 0.3s ease;
+        }
+
+        .offer-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .offer-card h3 {
+            color: var(--secondary);
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+        }
+
+        .offer-card p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        .offer-tag {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 8px 25px;
+            border-radius: 50px;
+            font-weight: 700;
+            margin-top: 15px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 10px rgba(255, 107, 107, 0.3);
+        }
+        
+        .offer-tag:hover {
+            background-color: #e05555;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Contact Info */
+        .contact-info {
+            text-align: center;
+            padding: 50px 0;
+            background-color: white;
+            margin-top: 60px;
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .contact-info p {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .contact-info a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.4rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: var(--secondary);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.4rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 100px 0;
+                min-height: 80vh;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .cta-button {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                padding: 80px 0;
+                min-height: 70vh;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.6rem;
+            }
+            
+            .offer-card {
+                padding: 25px 20px;
+            }
+            
+            .offer-card h3 {
+                font-size: 1.4rem;
+            }
+        }
+        /* Feedback Section */
+.feedback-section {
+    padding: 80px 0;
+    background-color: white;
+}
+
+.feedback-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.feedback-card {
+    background-color: #f8f9fa;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.feedback-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.feedback-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.feedback-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 15px;
+    border: 3px solid var(--primary);
+}
+
+.feedback-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.feedback-info h4 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    color: var(--dark);
+}
+
+.rating {
+    color: #ffc107;
+    font-size: 0.9rem;
+}
+
+.feedback-text {
+    font-style: italic;
+    color: #555;
+    line-height: 1.7;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .feedback-section {
+        padding: 60px 0;
+    }
+    
+    .feedback-card {
+        padding: 25px;
+    }
+}
+
+@media (max-width: 576px) {
+    .feedback-cards {
+        grid-template-columns: 1fr;
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- Hero Section with BG Image -->
+    <section class="hero">
+        <!-- Background Image -->
+        <img class="hero-bg" src="assets/images/neuai-hero2.jpg" alt="AI Technology Background">
+        
+        <!-- Hero Content -->
+        <div class="hero-content">
+            <h1>NeuAI: Empowering You with AI to Master Skills and Maximize Productivity</h1>
+            <p>Discover how artificial intelligence can streamline your routine and elevate your performance.</p>
+            <a href="https://forms.gle/Nu25f7FdqsPUVJAG7" class="cta-button">Register Now</a>
+        </div>
+    </section>
+
+    <!-- Special Offers Section -->
+    <section class="special-offers">
+        <div class="container">
+            <div class="section-title">
+                <h2>Special Offers</h2>
+            </div>
+            
+            <div class="offer-card">
+                <h3>Early Bird Special</h3>
+                <p>Enroll before August 31st and get 30% off all courses!</p>
+                <a href="https://forms.gle/Nu25f7FdqsPUVJAG7" class="offer-tag">Apply Offer</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Overview Section -->
+    <section class="container" id="courses">
+        <div class="section-title">
+            <h2>Course Modules</h2>
+        </div>
+        
+        <div class="course-cards">
+            <!-- Module 1 -->
+            <div class="course-card">
+                <div class="card-img">
+                    <img src="https://i2.wp.com/sthua.edu.sg/wp-content/uploads/2024/07/Artificial-Intelligence.png?fit=895%2C471&ssl=1" alt="AI Basics">
+                </div>
+                <div class="card-content">
+                    <h3>Introdection of Ai</h3>
+                    <p>Understand AI fundamentals and how to use AI for productivity and creativity.</p>
+                </div>
+            </div>
+            <!-- Module 1 -->
+            <div class="course-card">
+                <div class="card-img">
+                    <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="AI Basics">
+                </div>
+                <div class="card-content">
+                    <h3>Prompt Engineering Essentials</h3>
+                    <p>Teach participants how to design effective AI prompts for optimal responses</p>
+                </div>
+            </div>
+            
+            <!-- Module 2 -->
+            <div class="course-card">
+                <div class="card-img">
+                    <img src="https://img-c.udemycdn.com/course/480x270/5539498_4ff8.jpg" alt="AI at Home">
+                </div>
+                <div class="card-content">
+                    <h3>AI Chatbots</h3>
+                    <p>Learn how to effectively use AI-powered chatbots for research, automation, and idea generation.</p>
+                </div>
+            </div>
+            
+            <!-- Module 3 -->
+            <div class="course-card">
+                <div class="card-img">
+                    <img src="https://images.ctfassets.net/ukazlt65o6hl/56B5XSE2dT7rlQgXDMfbx3/71628d4a6a6a09577e195b6a749ac467/AI_in_social_media_banner.png" alt="AI Productivity">
+                </div>
+                <div class="card-content">
+                    <h3>AI-Powered Presentation & Creative Media Generation</h3>
+                    <p>Learn how to create professional presentations and AI-generated multimedia content</p>
+                </div>
+            </div>
+            <!-- Module 4 -->
+            <div class="course-card">
+                <div class="card-img">
+                    <img src="https://www.simplilearn.com/ice9/free_resources_article_thumb/Cutting_Edge_Innovative_AI_Project_Ideas.jpg" alt="AI Productivity">
+                </div>
+                <div class="card-content">
+                    <h3>Major Integration Projec</h3>
+                    <p>Build a personal AI productivity suite using all learned skills.</p>
+                </div>
+            </div>
+            <!-- Module 5 -->
+            <div class="course-card">
+                <div class="card-img">
+                    <img src="https://prdlive.kerala.gov.in/wp-content/uploads/2023/10/grand-finale.jpg" alt="AI Productivity">
+                </div>
+                <div class="card-content">
+                    <h3>Additional Course Features</h3>
+                    <p>Gain practical skills through hands-on activities and real-world demos. Access an exclusive AI toolkit with templates and guides. Wrap up with the Finale session—an offline meet where you receive your certificate and expert feedback.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+       <!-- <section class="feedback-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Our Students Say</h2>
+            </div>
+            
+            <div class="feedback-cards">
+                
+                <div class="feedback-card">
+                    <div class="feedback-header">
+                        <div class="feedback-img">
+                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Sarah K.">
+                        </div>
+                        <div class="feedback-info">
+                            <h4>Sarah K.</h4>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="feedback-text">
+                        "The AI Productivity course transformed how I work! I've saved 10+ hours weekly using the automation tools they taught."
+                    </p>
+                </div>
+                
+                
+                <div class="feedback-card">
+                    <div class="feedback-header">
+                        <div class="feedback-img">
+                            <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Raj P.">
+                        </div>
+                        <div class="feedback-info">
+                            <h4>Raj P.</h4>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="feedback-text">
+                        "Never thought I could understand AI, but the fundamentals course made it so accessible. Highly recommend!"
+                    </p>
+                </div>
+                
+                
+                <div class="feedback-card">
+                    <div class="feedback-header">
+                        <div class="feedback-img">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Priya M.">
+                        </div>
+                        <div class="feedback-info">
+                            <h4>Priya M.</h4>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="feedback-text">
+                        "The smart home module helped me automate my entire apartment. Worth every penny!"
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <!-- Contact Info -->
+    <section class="contact-info">
+        <div class="container">
+            <p>Have questions? Call us at:</p>
+            <a href="tel:+918089124307">+91 8089124307</a>
+        </div>
+    </section>
+</body>
+</html>
